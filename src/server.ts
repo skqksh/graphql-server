@@ -1,19 +1,12 @@
 import express from 'express'
-import { ApolloServer, gql } from 'apollo-server-express'
+import { ApolloServer } from 'apollo-server-express'
+import resolvers from './resolvers'
+import { typeDefs } from './schema'
 
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`
-
-const resolvers = {
-  Query: {
-    hello: (): string => 'Hello world!',
-  },
-}
-
-const server = new ApolloServer({ typeDefs, resolvers })
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+})
 
 const app = express()
 server.applyMiddleware({ app })
