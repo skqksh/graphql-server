@@ -2,6 +2,8 @@ import express from 'express'
 import { ApolloServer } from 'apollo-server-express'
 import resolvers from './resolvers'
 import { typeDefs } from './schema'
+import { config } from 'dotenv'
+config()
 
 const server = new ApolloServer({
   typeDefs,
@@ -16,3 +18,5 @@ app.listen({ port: 4000 }, () =>
     'Now browse to http://localhost:4000' + server.graphqlPath
   )
 )
+
+export default server
