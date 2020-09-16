@@ -1,0 +1,16 @@
+import { PrismaClient, Profile as _Profile } from '@prisma/client'
+const prisma = new PrismaClient()
+
+export type Profile = _Profile
+
+export default {
+  profileByUserId: async ({
+    userId,
+  }: {
+    userId: number
+  }): Promise<Profile | null> =>
+    await prisma.profile.findOne({
+      where: { userId },
+      include: { user: {} },
+    }),
+}

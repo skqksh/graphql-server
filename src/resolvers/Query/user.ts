@@ -1,22 +1,37 @@
-import { PrismaClient, User } from '@prisma/client'
-const prisma = new PrismaClient({
-  log: ['query', 'info', 'warn'],
-})
+import { AuthenticationError } from 'apollo-server-express'
+import _ from 'lodash'
+
+import { Utils, Errors } from '@constants'
+import UserService from '@service/user'
+
+type LoginInput = {
+  email: string
+  password: string
+}
 
 export default {
-  users: async (): Promise<User[]> =>
-    await prisma.user.findMany({
-      include: { profile: {}, writtenPosts: {} },
-    }),
-  userById: async (
+  login: async (
     parent: undefined,
-    { id }: { id: number }
-  ): Promise<User | null> =>
-    await prisma.user.findOne({
-      where: { id },
-      include: {
-        writtenPosts: { where: { authorId: id } },
-        profile: {},
-      },
-    }),
+    {
+      data: { email, password },
+    }: {
+      data: LoginInput
+    }
+  ): Promise<string> => {
+    const encPw = Utils.HashPassword({ password })
+
+    const user = await UserService.userByEmail({ email })
+
+    if (_.isEmpty(user)) {
+      throw new AuthenticationError(Errors.CODE.WRONG_LOGIN_INPUT)
+    }
+
+    const wrongPassword = user?.password !== encPw
+
+    if (wrongPassword) {
+      throw new AuthenticationError(Errors.CODE.WRONG_LOGIN_INPUT)
+    }
+
+    return 'good'
+  },
 }

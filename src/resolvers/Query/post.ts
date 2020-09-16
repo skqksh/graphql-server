@@ -1,13 +1,8 @@
-import { PrismaClient, Post } from '@prisma/client'
-const prisma = new PrismaClient()
+import PostService, { Post } from '@service/post'
 
 export default {
   postById: async (
     parent: undefined,
     { id }: { id: number }
-  ): Promise<Post | null> =>
-    await prisma.post.findOne({
-      where: { id },
-      include: { author: {} },
-    }),
+  ): Promise<Post | null> => await PostService.postById({ id }),
 }

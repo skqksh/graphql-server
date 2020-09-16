@@ -1,13 +1,9 @@
-import { PrismaClient, Profile } from '@prisma/client'
-const prisma = new PrismaClient()
+import ProfileService, { Profile } from '@service/profile'
 
 export default {
   profileByUserId: async (
     parent: undefined,
     { userId }: { userId: number }
   ): Promise<Profile | null> =>
-    await prisma.profile.findOne({
-      where: { userId },
-      include: { user: {} },
-    }),
+    await ProfileService.profileByUserId({ userId }),
 }

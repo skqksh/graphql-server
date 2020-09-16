@@ -3,22 +3,26 @@ import { gql } from 'apollo-server-express'
 export const typeDefs = gql`
   scalar Date
 
-  input CreateUserInput {
+  input LoginInput {
+    email: String!
     password: String!
-    email: String
+  }
+
+  input SignUpInput {
+    password: String!
+    email: String!
     name: String!
   }
 
   type Query {
     hello: String
-    users: [User]
-    userById(id: Int!): User
+    login(data: LoginInput): String
     profileByUserId(userId: Int!): Profile
     postById(id: Int!): Post
   }
 
   type Mutation {
-    createUser(data: CreateUserInput!): User!
+    signUp(data: SignUpInput!): User!
   }
 
   type User {

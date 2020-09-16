@@ -31,14 +31,16 @@
     "lint-staged": "^10.3.0",
     "nodemon": "^2.0.4",
     "prettier": "^2.1.1",
+    "rimraf": "^3.0.2",
     "ts-jest": "^26.3.0",
     "ts-node": "^9.0.0",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^4.0.2"
   },
   "scripts": {
-    "start": "npm run build && nodemon dist/server.js",
-    "build": "rm -rf dist && tsc",
-    "dev": "nodemon src/server.ts",
+    "start": "npm run build && nodemon -r tsconfig-paths/register dist/server.js",
+    "build": "rimraf dist && tsc",
+    "dev": "nodemon -r tsconfig-paths/register src/server.ts",
     "test": "jest",
     "test:unit": "jest",
     "test:int": "jest -c='jest.integration.config.js'",
@@ -46,7 +48,7 @@
     "prisma:update": "npm run prisma:migrate && npm run prisma:check",
     "prisma:migrate": "npx prisma migrate save --experimental && npx prisma migrate up --experimental",
     "prisma:check": "npx prisma introspect && npx prisma generate",
-    "prisma:delete-migration": "rm -rf prisma/migrations",
+    "prisma:delete-migration": "rimraf prisma/migrations",
     "@comment prisma:delete-migration": "have to run 'TRUNCATE \"_Migration\"' in DB after run that script"
   },
   "husky": {
