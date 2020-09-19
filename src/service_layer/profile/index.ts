@@ -1,7 +1,7 @@
-import { PrismaClient, Profile as _Profile } from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
-export type Profile = _Profile
+import { Profile } from '@models/api'
 
 export default {
   profileByUserId: async ({

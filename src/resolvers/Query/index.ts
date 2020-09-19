@@ -1,10 +1,10 @@
-import user from './user'
+import auth from './auth'
 import profile from './profile'
 import post from './post'
 
 export default {
   hello: (): string => 'Hello world~!',
-  ...user,
+  ...auth,
   ...profile,
   ...post,
 }

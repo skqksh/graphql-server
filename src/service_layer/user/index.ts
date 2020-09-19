@@ -1,11 +1,5 @@
-import {
-  PrismaClient,
-  User as _User,
-  UserCreateInput as _UserCreateInput,
-} from '@prisma/client'
-
-export type User = _User
-export type UserCreateInput = _UserCreateInput
+import { PrismaClient } from '@prisma/client'
+import { User, UserCreateInput } from '@models/api'
 
 const prisma = new PrismaClient()
 

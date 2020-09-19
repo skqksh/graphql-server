@@ -2,14 +2,15 @@ import { AuthenticationError } from 'apollo-server-express'
 import _ from 'lodash'
 
 import { Utils, Errors } from '@constants'
-import UserService, { User, UserCreateInput } from '@service/user'
+import UserService from '@service/user'
+import { User, UserCreateInput } from '@models/api'
 
 export default {
   signUp: async (
     parent: undefined,
     { data: { name, email, password } }: { data: UserCreateInput }
   ): Promise<User> => {
-    const encPw = Utils.HashPassword({ password })
+    const encPw = Utils.hashPassword({ password })
     const user = await UserService.userByEmail({ email })
 
     if (_.some(user)) {

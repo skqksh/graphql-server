@@ -1,4 +1,6 @@
-import PostService, { Post } from '@service/post'
+import PostService from '@service/post'
+
+import { Post } from '@models/api'
 
 export default {
   postById: async (

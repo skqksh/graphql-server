@@ -1,4 +1,6 @@
-import ProfileService, { Profile } from '@service/profile'
+import ProfileService from '@service/profile'
+
+import { Profile } from '@models/api'
 
 export default {
   profileByUserId: async (

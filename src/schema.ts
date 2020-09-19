@@ -17,6 +17,7 @@ export const typeDefs = gql`
   type Query {
     hello: String
     login(data: LoginInput): String
+    loginByAccessToken: User
     profileByUserId(userId: Int!): Profile
     postById(id: Int!): Post
   }

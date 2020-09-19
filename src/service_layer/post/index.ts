@@ -1,7 +1,7 @@
-import { PrismaClient, Post as _Post } from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
-export type Post = _Post
+import { Post } from '@models/api'
 
 export default {
   postById: async ({ id }: { id: number }): Promise<Post | null> =>
