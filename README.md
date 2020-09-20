@@ -1,7 +1,5 @@
 ## Setting
 
----
-
 ### add file
 
 ```
@@ -25,11 +23,9 @@ DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=pub
 DATABASE_URL="postgresql://johndoe:randompassword@localhost:5432/mydb?schema=public"
 ```
 
-- It'f for script prisma:update
+- It's for script prisma:update
 
 ## Install
-
----
 
 - install postgresql
 - create database with `sql/schema.sql`
