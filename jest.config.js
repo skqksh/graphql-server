@@ -5,7 +5,6 @@ module.exports = {
     '^.+\\.(ts)$': 'ts-jest',
   },
   setupFiles: ['<rootDir>/jestSetupFile.js'],
-  testPathIgnorePatterns: ['/node_modules/', '__test__/integration'],
   moduleNameMapper: {
     '@constants': '<rootDir>/src/constants',
     '@service/(.*)': '<rootDir>/src/service_layer/$1',

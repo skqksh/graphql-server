@@ -22,6 +22,7 @@
     "@typescript-eslint/eslint-plugin": "^4.0.1",
     "@typescript-eslint/parser": "^4.0.1",
     "apollo-server-testing": "^2.17.0",
+    "cross-env": "^7.0.2",
     "eslint": "^7.8.1",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-prettier": "^6.11.0",
@@ -40,14 +41,15 @@
     "typescript": "^4.0.2"
   },
   "scripts": {
-    "start": "npm run build && nodemon -r tsconfig-paths/register dist/server.js",
+    "start": "npm run build &&cross-env NODE_ENV=prod nodemon -r tsconfig-paths/register dist/server.js",
     "build": "rimraf dist && tsc",
     "dev": "nodemon -r tsconfig-paths/register src/server.ts",
-    "test:unit": "jest",
-    "test:int": "jest -c='jest.integration.config.js'",
+    "test": "npm run test:unit && npm run test:int",
+    "test:unit": "cross-env NODE_ENV=test jest -c='jest.unit.config.js'",
+    "test:int": "cross-env NODE_ENV=test jest -c='jest.integration.config.js'",
     "lint": "eslint --fix src/*",
     "prisma:update": "npm run prisma:migrate && npm run prisma:check",
-    "prisma:migrate": "npx prisma migrate save --experimental && npx prisma migrate up --experimental",
+    "prisma:migrate": "npx prisma migrate save --experimental &&npx prisma migrate up --experimental",
     "prisma:check": "npx prisma introspect && npx prisma generate",
     "prisma:delete-migration": "rimraf prisma/migrations",
     "@comment prisma:delete-migration": "have to run 'TRUNCATE \"_Migration\"' in DB after run that script"
